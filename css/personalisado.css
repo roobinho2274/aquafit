@@ -1,0 +1,41 @@
+nav ul li a{
+    color: #fff !important;
+}
+nav ul li a:hover{
+    color: #000 !important;
+}
+header{
+    margin-bottom: 56px !important;
+}
+.imagem1 {
+    color: #FF8C00 !important;
+}
+.imagem2 {
+    color: #FF8C00 !important;
+}
+.imagem3 {
+    color: #FF8C00 !important;
+}
+.imagem4 {
+    color: #FF8C00 !important;
+}
+.textocarro {
+    color: #000 !important;
+    font-size: 1.5rem;
+}
+.servicos
+{
+    background-color: #FFFACD;
+    border-radius: 0rem;
+    margin-bottom: 0rem;
+}
+.depoimentos{
+    background-color: #F0E68C;
+    border-radius: 0rem;
+    margin-bottom: 0rem;
+}
+
+nav a .img-fluid
+{
+    max-width: 25% !important;
+}
