@@ -1,7 +1,3 @@
-<?php
-
-session_start(); //Inicializa a sessão
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +9,7 @@ session_start(); //Inicializa a sessão
         <link rel="stylesheet" href="../css/bootstrap.css" >
         <link rel="stylesheet" href="../css/personalisado.css" >
 
-        <title>Cadastro Aluno</title>
+        <title>Altera Aluno</title>
 
     </head>
     <body>
@@ -40,14 +36,21 @@ session_start(); //Inicializa a sessão
         <main role="main">
             <div class="jumbotron">
                 <div class="text-center ">
-                    <h3>FORMULARIO PARA CADASTRO DE ALUNOs</h3>
+                    <h3>FORMULARIO PARA ALTERAÇÃO DE ALUNOs</h3>
                 </div>
                 <div class = "container" style="background-color: #CCFFFF" >
                     <?PHP
+                    include_once ('../conexao.php');
                     if (isset($_SESSION['msn'])) {
                         echo $_SESSION['msn'];
                         unset($_SESSION['msn']);
                     }
+
+                    $codigo = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_NUMBER_INT);
+
+                    $sql = "SELECT * from aluno WHERE cod = $codigo";
+                    $dados = mysqli_query($con, $sql);
+                    $row = mysqli_fetch_assoc($dados);
                     ?>
                     <form action="../Controle/cadAl.php" method="POST">
                         <br/>
@@ -56,13 +59,13 @@ session_start(); //Inicializa a sessão
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">*NOME :</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputEmail3" required  name="nome">
+                                <input type="text" class="form-control" id="inputEmail3" required  name="nome" value="<?php echo $row['nome']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">*CPF :</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputEmail3" required  name="cpf">
+                                <input type="text" class="form-control" id="inputEmail3" required  name="cpf" value="<?php echo $row['cpf']; ?>">
                             </div>
                         </div>
                         <fieldset class="form-group">
@@ -70,19 +73,37 @@ session_start(); //Inicializa a sessão
                                 <legend class="col-form-label col-sm-2 pt-0">SEXO</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexo" value="Masculino">
+                                        <?php
+                                        if ($row['sexo'] == 1)
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Masculino' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Masculino' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios1">
                                             MASCULINO
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexo" value="Feminino">
+                                        <?php
+                                        if ($row['sexo'] == 2)
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Feminino' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Feminino' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios2">
                                             FEMININO
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sexo" value="Outros">
+                                        <?php
+                                        if ($row['sexo'] == 0)
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Outros' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='sexo' value='Outros' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios2">
                                             OUTROS
                                         </label>
@@ -93,7 +114,7 @@ session_start(); //Inicializa a sessão
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">*Data nascimento:</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="inputEmail3" required  name="dataNascimento">
+                                <input type="date" class="form-control" id="inputEmail3" required  name="dataNascimento" value="<?php echo $row['data_nascimento']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -101,35 +122,35 @@ session_start(); //Inicializa a sessão
                         </div>
                         <div class="form-group row">
                             <div class="col-10">
-                                <input type="text" class="form-control" placeholder="LOGRADOURO" required name="logradouro">
+                                <input type="text" class="form-control" placeholder="LOGRADOURO" required name="logradouro" value="<?php echo $row['rua']; ?>">
                             </div>
                             <div class="col-2">
-                                <input type="number" class="form-control" placeholder="NUMERO" required name="numeroresidencia">
+                                <input type="number" class="form-control" placeholder="NUMERO" required name="numeroresidencia" value="<?php echo $row['numero']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="BAIRRO" required name="bairro">
+                                <input type="text" class="form-control" placeholder="BAIRRO" required name="bairro" value="<?php echo $row['bairro']; ?>">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="COMPLEMENTO"  name="complemento">
+                                <input type="text" class="form-control" placeholder="COMPLEMENTO"  name="complemento" value="<?php echo $row['complemento']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-6">
-                                <input type="text" class="form-control" placeholder="CIDADE" required name="cidade">
+                                <input type="text" class="form-control" placeholder="CIDADE" required name="cidade" value="<?php echo $row['cidade']; ?>">
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" placeholder="CEP" required required name="cep">
+                                <input type="text" class="form-control" placeholder="CEP" required required name="cep" value="<?php echo $row['cep']; ?>">
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" placeholder="UF" required name="estado">
+                                <input type="text" class="form-control" placeholder="UF" required name="estado" value="<?php echo $row['estado']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">*TELEFONE :</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputEmail3" required name="telefone">
+                                <input type="text" class="form-control" id="inputEmail3" required name="telefone" value="<?php echo $row['telefone']; ?>">
                             </div>
                         </div>
                         <hr>
@@ -139,19 +160,37 @@ session_start(); //Inicializa a sessão
                                 <legend class="col-form-label col-sm-2 pt-0">Já frequentou aula de natação ou hidroginástica?</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="modalidade" value="1">
+                                        <?php
+                                        if ($row['modalidade'] == 1)
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='1' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='1' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios1">
                                             Sim, Natação
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="modalidade" value="2">
+                                        <?php
+                                        if ($row['modalidade'] == 2)
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='2' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='2' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios2">
                                             Sim, Hidroginástica
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="modalidade" value="0">
+                                        <?php
+                                        if ($row['modalidade'] == 0)
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='0' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='modalidade' value='0' >";
+                                        ?>
+
                                         <label class="form-check-label" for="gridRadios3">
                                             Não
                                         </label>
@@ -162,19 +201,31 @@ session_start(); //Inicializa a sessão
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tempo em meses:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="tempo">
+                                <input type="number" class="form-control" name="tempo" value="<?php echo $row['tempoFrequente']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Local(academia):</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control"  name="onde">
+                                <?php
+                                if ($row['local'] != "nulo")
+                                    echo "<input type='text' class='form-control'  name='onde' value=" . $row['local'] . ">";
+                                else
+                                    echo "<input type='text' class='form-control'  name='onde' >";
+                                ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Em qual período(mes/ano):</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control"name="periodo">
+                                <?php
+                                if ($row['periodo'] != "nulo")
+                                    echo "<input type='text' class='form-control'  name='periodo' value=" . $row['periodo'] . ">";
+                                else
+                                    echo "<input type='text' class='form-control'  name='periodo' >";
+                                ?>
+
                             </div>
                         </div>
 
@@ -183,19 +234,35 @@ session_start(); //Inicializa a sessão
                                 <legend class="col-form-label col-sm-2 pt-0">Caso seja natação, qual seu nível?</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="nivel" value="1">
+                                        <?php
+                                        if ($row['nivel'] == 1)
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='1' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='1' >";
+                                        ?>
+
                                         <label class="form-check-label" >
                                             Adaptação
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="nivel" value="2">
+                                        <?php
+                                        if ($row['nivel'] == 2)
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='2' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='2' >";
+                                        ?>
                                         <label class="form-check-label">
                                             Aprendizagem Técnica
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="nivel" value="3">
+                                        <?php
+                                        if ($row['nivel'] == 3)
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='3' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='nivel' value='3' >";
+                                        ?>
                                         <label class="form-check-label" >
                                             Aperfeiçoamento
                                         </label>
@@ -208,25 +275,47 @@ session_start(); //Inicializa a sessão
                                 <legend class="col-form-label col-sm-2 pt-0">Motivo da inscrição?</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="motivo" value="1">
+                                        <?php
+                                        if ($row['motivo'] == 1)
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='1' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='1' >";
+                                        ?>
+
                                         <label class="form-check-label" >
                                             Aprender a nadar
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="motivo" value="2">
+                                        <?php
+                                        if ($row['motivo'] == 2)
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='2' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='2' >";
+                                        ?>
                                         <label class="form-check-label">
                                             Concelho médico
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="motivo" value="3">
-                                        <label class="form-check-label" >
+                                        <?php
+                                        if ($row['motivo'] == 3)
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='3' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='3' >";
+                                        ?>
+                                        <label class="form-check-label">
                                             Condicionamento físico
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="motivo" value="4">
+                                        <?php
+                                        if ($row['motivo'] == 4)
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='4' checked>";
+                                        else
+                                            echo "<input class='form-check-input' type='radio' name='motivo' value='4' >";
+                                        ?>
+
                                         <label class="form-check-label">
                                             Outros
                                         </label>
@@ -241,7 +330,7 @@ session_start(); //Inicializa a sessão
                 </div>
             </div>
         </main>
-        <a href="../Visao/home.php"<button class="btn btn-primary">VOLTAR</button></a>
+        <a href="../Visao/listaAlunos.php"<button class="btn btn-primary">VOLTAR</button></a>
         <script src="../js/jquery-3.3.1.slim.min.js"></script>
         <script src="../js/popper.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>

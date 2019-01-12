@@ -37,39 +37,31 @@
 
             <div class="jumbotron">
                 <div class="container">
-                    
+
                     <div class="card-deck">
                         <div class="card">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Controle de alunos</h5>
+                                <h5 class="card-title">Cadastro</h5>
                                 <blockquote class="blockquote text-center">
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/cadAlunos.php">Cadastrar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Aterar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Excluir</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Listar</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/cadAlunos.php">Cadastrar Aluno</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/cadTurmas.php">Cadastrar Turma</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/cadAtividade.php">Nova atividade</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/cadPagamentos.php">Pagamentos</a>
+
                                 </blockquote>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body text-center">
-                                <h5 class="card-title">Controle de turmas</h5>
+                                <h5 class="card-title">Consulta</h5>
                                 <blockquote class="blockquote text-center">
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Cadastrar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Aterar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Excluir</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Listar</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/listaTurmas.php">Turmas</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/listaPagamentos.php">Pagamentos</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/listaAlunos.php">Alunos</a>
+                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/listaAtividades.php">Atividades</a>
                                 </blockquote>
-                            </div>  </div>
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Controle de frequencia</h5>
-                                <blockquote class="blockquote text-center">
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Cadastrar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Aterar</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Excluir</a>
-                                    <a type="button" class="btn btn-primary btn-lg btn-block" href="../Visao/turmas.php">Listar</a>
-                                </blockquote>
-                            </div>  </div>
+                            </div>  
+                        </div>
                     </div>
                 </div>
             </div>
